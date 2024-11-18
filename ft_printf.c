@@ -6,7 +6,7 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:43:23 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/17 17:45:28 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:28:47 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ int	hola(int n, char c, va_list a)
 		n += ft_putchar(va_arg(a, int));
 	else if (c == 'u')
 		n += ft_putnbru(va_arg(a, int));
-	printf("\n-------");
-	printf("\nn=%d\n", n);
-	printf("-------\n");
+	else if (c == 'x')
+		n += ConvertHex(va_arg(a, int));
+		else if (c == 'X')
+		n += ConvertHexB(va_arg(a, int));
+	else if (c == '%')
+		ft_putchar('%');
 	return (n);
 }
 

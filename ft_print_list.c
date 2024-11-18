@@ -69,8 +69,7 @@ int	ft_putnbru(unsigned int n)
 	int	size;
 
 	size = ft_numlen(n);
-	
-	 if (n < 0)
+	if (n < 0)
 	{
 		ft_putchar('-');
 		n = -n;
@@ -86,4 +85,32 @@ int	ft_putnbru(unsigned int n)
 		ft_putchar(n + '0');
 	}
 	return (size);
+}
+
+int	ConvertHex(unsigned int n)
+{
+	int		remainder;
+	char	*alp;
+
+	alp = "0123456789abcdef";
+	remainder = 0;
+	if (n > 16)
+		ConvertHex(n / 16);
+	remainder = (n % 16);
+	putchar(alp[remainder]);
+	return (ft_numlen(n));
+}
+
+int	ConvertHexB(unsigned int n)
+{
+	int		remainder;
+	char	*alp;
+
+	alp = "0123456789ABCDEF";
+	remainder = 0;
+	if (n > 16)
+		ConvertHex(n / 16);
+	remainder = (n % 16);
+	putchar(alp[remainder]);
+	return (ft_numlen(n));
 }

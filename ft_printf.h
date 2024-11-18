@@ -10,6 +10,8 @@ int	ft_putchar(char c);
 int	ft_putnbr(int n);
 int	ft_putstr(char *str);
 int	ft_putnbru(unsigned int n);
+int	ConvertHex(unsigned int n);
+int	ConvertHexB(unsigned int n);
 int	ft_printf(const char *format, ...);
 
 #endif
