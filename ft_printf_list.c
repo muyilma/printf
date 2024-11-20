@@ -1,24 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_list.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/20 16:14:07 by musyilma          #+#    #+#             */
+/*   Updated: 2024/11/20 17:31:24 by musyilma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+#include <stdio.h> //sil
+#include <unistd.h>
 
-int	ft_numlen(int n)
-{
-	int	i;
-
-	i = 0;
-	if (n <= 0)
-	{
-		n = n * -1;
-		i++;
-	}
-	while (n)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-int	ft_numlenU(unsigned int n)
+int	ft_numlen(long n)
 {
 	int	i;
 
@@ -47,6 +43,11 @@ int	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
+	if (str == NULL)
+	{
+		i = ft_putstr("(null)");
+		return (i);
+	}
 	while (str[i])
 	{
 		write(1, &str[i], 1);
@@ -55,7 +56,7 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-int	ft_putnbr(int n)
+int	ft_putnbr(long n)
 {
 	int	size;
 
@@ -82,23 +83,7 @@ int	ft_putnbr(int n)
 	return (size);
 }
 
-int	ft_putnbru(unsigned int n)
-{
-	if (n >= 10)
-	{
-		ft_putnbru(n / 10);
-		ft_putnbru(n % 10);
-	}
-	else
-	{
-		ft_putchar(n + '0');
-	}
-	return (ft_numlenU(n));
-}
-
-
-
-int	ConvertHex(unsigned int n)
+int	convert_hex(unsigned int n)
 {
 	int		remainder;
 	char	*alp;
@@ -108,14 +93,13 @@ int	ConvertHex(unsigned int n)
 	alp = "0123456789abcdef";
 	remainder = 0;
 	if (n >= 16)
-		size = ConvertHex(n / 16);
+		size = convert_hex(n / 16);
 	remainder = (n % 16);
 	size += ft_putchar(alp[remainder]);
 	return (size);
 }
 
-
-int	ConvertHexB(unsigned int n)
+int	convert_hexb(unsigned int n)
 {
 	int		remainder;
 	char	*alp;
@@ -125,24 +109,33 @@ int	ConvertHexB(unsigned int n)
 	alp = "0123456789ABCDEF";
 	remainder = 0;
 	if (n >= 16)
-		size = ConvertHexB(n / 16);
+		size = convert_hexb(n / 16);
 	remainder = (n % 16);
 	size += ft_putchar(alp[remainder]);
 	return (size);
 }
 
-int	ConvertPointer(long n)
+int	convert_pointer(unsigned long n)
 {
-	long        remainder;
-    char    *alp;
-    int        size;
+	long	remainder;
+	char	*alp;
+	int		size;
 
-    size = 0;
-    alp = "0123456789abcdef";
-    remainder = 0;
-    if (n >= 16)
-        size = ConvertHex(n / 16);
-    remainder = (n % 16);
-    size += ft_putchar(alp[remainder]);
-    return (size);
+	size = 2;
+	alp = "0123456789abcdef";
+	remainder = 0;
+	if (n == 0)
+	{
+		size = ft_putstr("(nil)");
+		return (size);
+	}
+	if (n >= 16)
+		size = convert_pointer(n / 16);
+	if (size == 2)
+	{
+		ft_putstr("0x");
+	}
+	remainder = (n % 16);
+	size += ft_putchar(alp[remainder]);
+	return (size);
 }
