@@ -1,8 +1,6 @@
 NAME=libftprintf.a
 
-DEBUG=main.c -g
-
-SRC=ft_printf_list.c ft_printf.c ft_putchar.c
+SRC=ft_printf_list.c ft_printf.c 
 
 OBJS=${SRC:.c=.o}
 
@@ -20,8 +18,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-debug: $(NAME)
-	$(CC) $(DEBUG) $(NAME) -o debug 
 
 .PHONY: all clean fclean re

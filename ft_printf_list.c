@@ -6,30 +6,17 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:14:07 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/21 12:33:56 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:12:10 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h> //sil
 #include <unistd.h>
 
-int	ft_numlen(long n)
+int	ft_putchar(char c)
 {
-	int	i;
-
-	i = 0;
-	if (n <= 0)
-	{
-		n = n * -1;
-		i++;
-	}
-	while (n)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
+	write(1, &c, 1);
+	return (1);
 }
 
 int	ft_putstr(char *str)
@@ -54,30 +41,28 @@ int	ft_putnbr(long n)
 {
 	int	size;
 
-	size = ft_numlen(n);
+	size = 0;
 	if (n == -2147483648)
 	{
-		write(1, "-2147483648", 11);
+		size += ft_putstr("-2147483648");
 	}
 	else if (n < 0)
 	{
-		ft_putchar('-');
+		size += ft_putchar('-');
 		n = -n;
-		ft_putnbr(n);
+		size += ft_putnbr(n);
 	}
 	else if (n >= 10)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		size += ft_putnbr(n / 10);
+		size += ft_putnbr(n % 10);
 	}
 	else
-	{
-		ft_putchar(n + '0');
-	}
+		size += ft_putchar(n + '0');
 	return (size);
 }
 
-int	convert_hexba(unsigned int n, char c)
+int	convert_hex(unsigned int n, char c)
 {
 	int		remainder;
 	char	*alph;
@@ -89,7 +74,7 @@ int	convert_hexba(unsigned int n, char c)
 	alph2 = "0123456789ABCDEF";
 	remainder = 0;
 	if (n >= 16)
-		size = convert_hexba(n / 16, c);
+		size = convert_hex(n / 16, c);
 	remainder = (n % 16);
 	if (c == 'x')
 	{

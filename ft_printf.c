@@ -6,13 +6,12 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:43:23 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/21 12:25:01 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:10:31 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
-#include <stdio.h> //sil
 
 int	hola(int n, char c, va_list a)
 {
@@ -25,11 +24,11 @@ int	hola(int n, char c, va_list a)
 	else if (c == 'u')
 		n += ft_putnbr(va_arg(a, unsigned int));
 	else if (c == 'x' || c == 'X')
-		n += convert_hexba(va_arg(a, unsigned int), c);
+		n += convert_hex(va_arg(a, unsigned long), c);
 	else if (c == '%')
 		n += ft_putchar('%');
 	else if (c == 'p')
-		n += convert_pointer(va_arg(a, long));
+		n += convert_pointer(va_arg(a, unsigned long));
 	return (n);
 }
 
