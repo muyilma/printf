@@ -2,7 +2,7 @@ NAME=libftprintf.a
 
 DEBUG=main.c -g
 
-SRC=ft_printf_list.c ft_printf.c
+SRC=ft_printf_list.c ft_printf.c ft_putchar.c
 
 OBJS=${SRC:.c=.o}
 

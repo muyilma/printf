@@ -6,7 +6,7 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:14:07 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/20 17:31:24 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:33:56 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ int	ft_numlen(long n)
 		i++;
 	}
 	return (i);
-}
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
 }
 
 int	ft_putstr(char *str)
@@ -83,35 +77,28 @@ int	ft_putnbr(long n)
 	return (size);
 }
 
-int	convert_hex(unsigned int n)
+int	convert_hexba(unsigned int n, char c)
 {
 	int		remainder;
-	char	*alp;
+	char	*alph;
+	char	*alph2;
 	int		size;
 
 	size = 0;
-	alp = "0123456789abcdef";
+	alph = "0123456789abcdef";
+	alph2 = "0123456789ABCDEF";
 	remainder = 0;
 	if (n >= 16)
-		size = convert_hex(n / 16);
+		size = convert_hexba(n / 16, c);
 	remainder = (n % 16);
-	size += ft_putchar(alp[remainder]);
-	return (size);
-}
-
-int	convert_hexb(unsigned int n)
-{
-	int		remainder;
-	char	*alp;
-	int		size;
-
-	size = 0;
-	alp = "0123456789ABCDEF";
-	remainder = 0;
-	if (n >= 16)
-		size = convert_hexb(n / 16);
-	remainder = (n % 16);
-	size += ft_putchar(alp[remainder]);
+	if (c == 'x')
+	{
+		size += ft_putchar(alph[remainder]);
+	}
+	else if (c == 'X')
+	{
+		size += ft_putchar(alph2[remainder]);
+	}
 	return (size);
 }
 
