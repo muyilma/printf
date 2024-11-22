@@ -6,7 +6,7 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:14:07 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/21 15:12:10 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:05:33 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ int	ft_putnbr(long n)
 	int	size;
 
 	size = 0;
-	if (n == -2147483648)
-	{
-		size += ft_putstr("-2147483648");
-	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		size += ft_putchar('-');
 		n = -n;
@@ -104,9 +100,7 @@ int	convert_pointer(unsigned long n)
 	if (n >= 16)
 		size = convert_pointer(n / 16);
 	if (size == 2)
-	{
 		ft_putstr("0x");
-	}
 	remainder = (n % 16);
 	size += ft_putchar(alp[remainder]);
 	return (size);

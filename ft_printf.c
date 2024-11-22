@@ -6,14 +6,13 @@
 /*   By: musyilma <musyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:43:23 by musyilma          #+#    #+#             */
-/*   Updated: 2024/11/21 15:10:31 by musyilma         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:00:44 by musyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
-int	hola(int n, char c, va_list a)
+static int	ft_printf_ex(int n, char c, va_list a)
 {
 	if (c == 'd' || c == 'i')
 		n += ft_putnbr(va_arg(a, int));
@@ -45,7 +44,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			number = hola(number, format[i + 1], arg);
+			number = ft_printf_ex(number, format[i + 1], arg);
 			i += 2;
 		}
 		else
